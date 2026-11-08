@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeAlpha - URL Shortener</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #f4f7f6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .card {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 480px;
+        text-align: center;
+      }
+      h2 {
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+      }
+      input {
+        width: 90%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+      }
+      button {
+        background: #2563eb;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        width: 95%;
+        font-weight: bold;
+      }
+      button:hover {
+        background: #1d4ed8;
+      }
+      .output-section {
+        margin-top: 1.5rem;
+        padding: 15px;
+        border-radius: 6px;
+        background: #f8fafc;
+        border: 2px dashed #cbd5e1;
+        text-align: left;
+      }
+      .output-title {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin-bottom: 8px;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      .success-box {
+        background: #dcfce7;
+        border: 1px solid #86efac;
+        color: #166534;
+        padding: 12px;
+        border-radius: 6px;
+        word-break: break-all;
+      }
+      .error-box {
+        background: #fee2e2;
+        border: 1px solid #fca5a5;
+        color: #991b1b;
+        padding: 12px;
+        border-radius: 6px;
+      }
+      .placeholder-text {
+        color: #94a3b8;
+        font-style: italic;
+        font-size: 0.95rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>🔗 Raccourcisseur d'URL</h2>
+
+      <form method="POST" action="/">
+        <input
+          type="url"
+          name="long_url"
+          placeholder="Collez votre lien (ex: https://www.codealpha.tech)"
+          required
+        />
+        <button type="submit">Créer un raccourci</button>
+      </form>
+
+      <!-- Partie dédiée à l'affichage du lien raccourci (toujours visible) -->
+      <div class="output-section">
+        <div class="output-title">Résultat du lien raccourci :</div>
+
+        {% if short_url %}
+        <div class="success-box">
+          Votre lien :
+          <a href="{{ short_url }}" target="_blank"><b>{{ short_url }}</b></a>
+        </div>
+        {% elif error %}
+        <div class="error-box">{{ error }}</div>
+        {% else %}
+        <div class="placeholder-text">
+          Le lien court apparaîtra ici dès que vous cliquerez sur le bouton.
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
